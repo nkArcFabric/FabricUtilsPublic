@@ -1,0 +1,30 @@
+[project]
+name = "nkFabricPub"
+version = "0.1.0"
+description = "Utilities for working with Microsoft Fabric"
+authors = [
+  { name="Lars Kasper", email="lakas@naestved.dk" },
+  { name="Mads Lindeholm", email="madvli@naestved.dk"}
+]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.8"
+dependencies = [
+  "aiohttp>=3.10.11",
+  "delta>=0.4.2",
+  "delta-spark>=3.3.1",
+  "msal>=1.32.3",
+  "pandas>=2.0.3",
+  "pydantic>=2.10.6",
+  "pyspark==3.5.5",
+  "requests>=2.31",
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent"
+]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
