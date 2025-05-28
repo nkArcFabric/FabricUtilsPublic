@@ -24,37 +24,21 @@ class TableInputs(BaseModel):
     def _list_to_bracketed(cls, v: List[str]) -> str:
         return f"[{','.join(v)}]"
 
-class FieldModel(RootModel):
-    """
-    Validates and serializes a list of fields.
-    """
-    root: Dict[str, Any]
-
-    model_config = {
-        "extra" : "allow"
-    }
-
+class FieldModel(RootModel[Dict[str, Any]]):
     @model_validator(mode="after")
     def _check_keys(self):
         data_keys = set(self.root)
 
-        # Are alle required keys present?
         missing = REQUIRED_FIELDS - data_keys
         if missing:
             raise ValueError(f"Missing required fields: {', '.join(missing)}")
 
-        # Are there any unallowed keys?
         extra = data_keys - ALLOWED_FIELDS
         if extra:
             raise ValueError(f"Extra fields not allowed: {', '.join(extra)}")
         return self
 
-class EnvModel(RootModel):
-    """
-    Validates and serializes a list of environment names.
-    """
-    root: List[str]
-
+class EnvModel(RootModel[List[str]]):
     @model_validator(mode="after")
     def _check_env_keys(self):
         env_keys = set(self.root)
@@ -65,5 +49,4 @@ class EnvModel(RootModel):
                 f"env_config contains invalid env names: {sorted(illegal)}; "
                 f"expected one of {sorted(ALLOWED_ENVS)}"
             )
-
         return self
