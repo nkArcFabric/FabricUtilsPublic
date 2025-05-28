@@ -82,7 +82,7 @@ def _write_metadata_table(spark: SparkSession,
         # Write to Delta table
         env_config[env_var]["metadata_storage_path"] = env_config[env_var]["metadata_storage_path"].replace("TO_BE_REPLACED", "Tables")
         env_config[env_var]["metadata_table_name"] = f"{env_var}_{env_config[env_var]['metadata_table_name']}"
-        env_config[env_var]["metadata_table_path"] = f"{env_config[env_var]['metadata_table_name']}{env_config[env_var]["metadata_table_name"]}"
+        env_config[env_var]["metadata_table_path"] = f"{env_config[env_var]['metadata_table_name']}{env_config[env_var]['metadata_table_name']}"
         path = env_config[env_var]["metadata_storage_path"] + env_config[env_var]["metadata_table_name"]
         df.write.format("delta") \
             .option("mergeSchema", "true") \
